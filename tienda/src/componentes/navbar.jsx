@@ -3,6 +3,8 @@ import carrito from '../imagenes/carrito1.png';
 import Registro from './registro';
 import Login from './login';
 import "../estilos/modal.css";
+import { href, Link } from 'react-router-dom';
+
 
 
 function NavBar(){
@@ -24,12 +26,10 @@ function NavBar(){
         <div className="NavBar">
             <h1>tienda</h1>
             <ul className="nav">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Sobre nosotros</a></li>
-                <li><a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></li>
-                <li><a href="#" onClick={() => handleOpenModal("login")}>Iniciar Sesion</a></li>
+                <li><Link to="/">Inicio</Link></li>
+                <li><Link to= "/productos">Productos</Link></li>
+                <li> <Link to= "/registro" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
+                <li> <Link to= "/login" onClick={() => handleOpenModal("login")}>Iniciar Sesion</Link></li>
             </ul>
             <div className="carrito">
                 <button>

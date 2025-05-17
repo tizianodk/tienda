@@ -70,7 +70,7 @@ const [formData, setFormData] = useState({
 
                 <br />
                 
-                <button type="submit">Iniciar Sesion</button>
+                <button className="submit" type="submit">Iniciar Sesion</button>
                 <br />
                 <p>¿No tienes una cuenta? <a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></p>
                 <br />

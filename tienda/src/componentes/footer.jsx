@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../estilos/footer.css";
-import facebook from '../imagenes/facebook.png';
+import facebook from '../imagenes/fb.png';
 import instagram from '../imagenes/ig.png';
 
 

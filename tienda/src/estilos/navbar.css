@@ -1,5 +1,5 @@
 .NavBar{
-    background-color: white;
+    background-color: #2c2c2c; ;
     color: black;
     display: flex;
     padding: 5px;
@@ -14,11 +14,12 @@
     align-items: center;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .NavBar li{
     transition: all 0.5s ease;
-
+    color: black;
 }
 
 
@@ -44,7 +45,7 @@
 }
 
 .carrito button{
-    background-color: white;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     width: 65px;
@@ -52,4 +53,11 @@
     display: flex;
     justify-content: center;
     margin-right: 35px;
+    transition: all 0.5s ease;
 }
+
+.carrito button:hover{
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+}
+

@@ -4,7 +4,13 @@ const UserSchema = new mongoose.Schema({
     nombre : String,
     apellido : String,
     email : String,
-    password : String
+    password : String,
+      rol: {
+    type: String,
+    enum: ["cliente", "admin"], 
+    default: "cliente",
+  },
+
 })
 
 

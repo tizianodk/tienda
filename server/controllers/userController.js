@@ -17,8 +17,8 @@ exports.Register = async(req,res)=>{
 
     try{
        
-        const {nombre,apellido,email,password} = req.body
-        const nuevoU = await new User({nombre,apellido,email,password})
+        const {nombre,apellido,email,password,rol} = req.body
+        const nuevoU = await new User({nombre,apellido,email,password,  rol: rol || "cliente"})
         nuevoU.save()
         res.status(201).json({ message: "Usuario registrado con éxito" });
 
@@ -46,9 +46,17 @@ exports.Login = async(req,res)=>{
     }   
    
 
- res.json({ message: "Inicio de sesión exitoso", user });
-  } catch (error) {
-    res.status(500).json({ message: "Error en el login", error });
-  }
+  res.status(200).json({
+    message: "Login exitoso",
+    user: {
+      id: usuario._id,
+      nombre: usuario.nombre,
+      rol: usuario.rol,
+    },
+  })
+}
     
+catch(err){
+    console.log("ocurrio un error")
+}
 }

@@ -96,7 +96,7 @@ function Registro({handleOpenModal}) {
                 
                 <br />
                 
-                <button type="submit">Registrarse</button>
+                <button className='submit' type="submit">Registrarse</button>
                 <br />
                 
                 <p>¿Ya tienes una cuenta? <a href="#" onClick={() => handleOpenModal("login")}>Iniciar sesión</a></p>
