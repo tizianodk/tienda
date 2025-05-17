@@ -1,0 +1,43 @@
+.NavBar{
+    background-color: white;
+    color: black;
+    display: flex;
+    padding: 5px;
+    gap: 200px;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.NavBar h1{
+    font-size: 40px;
+    margin-left: 35px;
+}
+
+
+.nav{
+    display: flex;
+    gap: 40px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.carrito button{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    margin-right: 35px;
+}

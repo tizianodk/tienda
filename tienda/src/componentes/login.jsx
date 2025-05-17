@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import "../estilos/modal.css"
+
+
+function Login({handleOpenModal}){
+const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) =>{
+        const {name,value} = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await fetch("http://localhost:3000/usuarios/login",{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if(response.ok){
+                const data = await response.json();
+                alert("Inicio de sesión exitoso");
+                console.log(data);
+                
+            } else{
+                alert("Error al iniciar sesión, alguna de las credenciales es incorrecta");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error al iniciar sesión");
+        }
+    };
+
+
+
+    
+    return(
+        <div>
+            <form className="form" onSubmit={handleSubmit}>
+                <h1 className='titulo'>Iniciar Sesion</h1>
+                <input 
+                type="text" 
+                placeholder="Email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                />
+                
+                <br />
+                
+                <input 
+                type="password" 
+                placeholder="Contraseña"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required 
+                />
+
+                <br />
+                
+                <button type="submit">Iniciar Sesion</button>
+                <br />
+                <p>¿No tienes una cuenta? <a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></p>
+                <br />
+
+            </form>
+        </div>
+    )
+};
+
+export default Login 
