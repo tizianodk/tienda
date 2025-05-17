@@ -33,14 +33,18 @@ exports.Login = async(req,res)=>{
         const {email,password} = req.body
         const user = await User.findOne({email})
 
-   if (!user) {
+    if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    
-   if(user.password !== password){
-        return res.status(401).json({ message: "Contraseña incorrecta" });
 
-   }
+    if(user.email !== email){
+        return res.status(401).json({ message: "Email incorrecto" });
+    }
+    
+    if(user.password !== password){
+        return res.status(401).json({ message: "Contraseña incorrecta" });
+    }   
+   
 
  res.json({ message: "Inicio de sesión exitoso", user });
   } catch (error) {

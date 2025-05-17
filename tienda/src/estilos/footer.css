@@ -1,0 +1,43 @@
+.footer{
+    background-color: white ;
+    color: black;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    position:fixed;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer img{
+    width: 45px;
+    height: 40px;
+    margin-left: 35px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    display: flex;
+}
+
+.redes .facebook{
+    width: 55px;
+    height: 38px;
+}
+.footer img:hover{
+    transition: all 0.5s ease;
+    transform: scale(1.3);
+}
+
+.redes button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+    float: right;
+    margin-top: -30px;    
+}
