@@ -29,6 +29,7 @@ body {
   min-height: 100vh;
   overflow:scroll;
   overflow-x: hidden;
+  margin-top: 110px;
 }
 
 h1 {

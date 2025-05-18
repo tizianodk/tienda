@@ -58,8 +58,14 @@
 
 .inicio{
     display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100vw;
     margin-top: 0;
     margin-bottom: 20px;
+}
+
+.texto{
+    display: flex;
+    flex-direction: column;
 }

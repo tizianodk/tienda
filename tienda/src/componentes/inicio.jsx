@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../estilos/inicio.css";
 import imagen1 from '../imagenes/imagen1.png';
+import imagen2 from '../imagenes/imagen2.png';
 import imagen3 from '../imagenes/imagen3.png';
 import imagen4 from '../imagenes/imagen4.png';
 import imagen5 from '../imagenes/imagen5.png';
@@ -11,13 +12,14 @@ function Inicio() {
 
     const imagenes = [
         imagen1,
+        imagen2,
         imagen3,
         imagen4,
         imagen5,
     ];
 
     
-    const extendedImages = [imagenes[imagenes.length - 1], ...imagenes, imagenes[0]];
+    const extendedImages = [imagenes[imagenes.length - 1], ...imagenes];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -76,6 +78,15 @@ function Inicio() {
                 <button className="next" onClick={handleNext}>
                     &#10095;
                 </button>
+            </div>
+            <div className='texto'>
+                <h1 className='titulo'>Bienvenid@ a nuestra tienda</h1>
+                <p className='descripcion'>Aquí encontrarás una variedad de productos para satisfacer tus necesidades.</p>
+                <p className='descripcion'>¡Explora nuestra colección y encuentra lo que más te gusta!</p>
+                <p className='descripcion'>¡No olvides registrarte para obtener descuentos exclusivos!</p>
+                <p className='descripcion'>¡Contáctanos si tienes alguna pregunta o necesitas asistencia!</p>
+                <p className='descripcion'>¡Gracias por elegir nuestra tienda!</p>
+
             </div>
         </div>
     );

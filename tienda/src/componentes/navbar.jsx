@@ -4,6 +4,7 @@ import Registro from './registro';
 import Login from './login';
 import "../estilos/modal.css";
 import { href, Link } from 'react-router-dom';
+import Logo from '../imagenes/logo.png';
 
 
 
@@ -24,9 +25,9 @@ function NavBar(){
 
     return(
         <div className="NavBar">
-            <h1>tienda</h1>
+            <img src={Logo} className='logo' />
             <ul className="nav">
-                <li><Link to="/">Inicio</Link></li>
+                <li><Link to="/inicio">Inicio</Link></li>
                 <li><Link to= "/productos">Productos</Link></li>
                 <li> <Link to= "/registro" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
                 <li> <Link to= "/login" onClick={() => handleOpenModal("login")}>Iniciar Sesion</Link></li>

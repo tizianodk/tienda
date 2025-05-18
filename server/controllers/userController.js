@@ -49,14 +49,14 @@ exports.Login = async(req,res)=>{
   res.status(200).json({
     message: "Login exitoso",
     user: {
-      id: usuario._id,
-      nombre: usuario.nombre,
-      rol: usuario.rol,
+      id: user._id,
+      nombre: user.nombre,
+      rol: user.rol,
     },
   })
 }
     
 catch(err){
-    console.log("ocurrio un error")
+    console.log("ocurrio un error" +err)
 }
 }
