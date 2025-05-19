@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import "../estilos/modal.css"
+import { useNavigate } from 'react-router-dom';
 
 
-function Login({handleOpenModal}){
+function Login({  handleOpenModal}) {
 const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) =>{
         const {name,value} = e.target;
@@ -30,10 +33,14 @@ const [formData, setFormData] = useState({
             if(response.ok){
                 const data = await response.json();
                 alert("Inicio de sesión exitoso");
+                // setIsAuthenticated(true);
                 console.log(data);
-                
+               localStorage.setItem("userId", data.user.id);
+               localStorage.setItem("nombre", data.user.nombre);
+               localStorage.setItem("rol", data.user.rol);
+               navigate("/productos");
             } else{
-                alert("Error al iniciar sesión, alguna de las credenciales es incorrecta");
+                alert("Error al iniciar sesión, algunas de las credenciales es incorrecta");
             }
         } catch (error) {
             console.error("Error:", error);

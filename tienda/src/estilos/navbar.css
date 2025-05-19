@@ -50,6 +50,7 @@
     align-items: center;
     justify-content: center;
     list-style: none;
+    background-color: transparent;
 }
 
 .carrito button{
@@ -67,4 +68,17 @@
     transition: all 0.3s ease;
     transform: scale(1.1);
 }
+
+.registro, .login {
+    background-color: transparent;
+    color: black;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.registro:hover, .login:hover{
+    transform: scale(1.1);
+    color: #555;
+}
+
 

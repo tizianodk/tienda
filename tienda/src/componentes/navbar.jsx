@@ -27,13 +27,12 @@ function NavBar(){
         <div className="NavBar">
             <img src={Logo} className='logo' />
             <ul className="nav">
-                <li><Link to="/inicio">Inicio</Link></li>
-                <li><Link to= "/productos">Productos</Link></li>
-                <li> <Link to= "/registro" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
-                <li> <Link to= "/login" onClick={() => handleOpenModal("login")}>Iniciar Sesion</Link></li>
+                <li> <Link to= "/">Inicio</Link></li>
+                <li> <Link to= "/productos">Productos</Link></li>
+                <li> <Link to= "/" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
             </ul>
             <div className="carrito">
-                <button>
+                <button onClick={() => handleOpenModal("carrito")}>
                     <img src={carrito}/>
                 </button>
             </div>

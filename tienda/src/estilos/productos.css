@@ -1,0 +1,10 @@
+.productos{
+    border: 1px solid #ccc;
+    margin-bottom: 350px;
+    border-radius: 15px;
+    width: 280px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

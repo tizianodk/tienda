@@ -83,7 +83,7 @@ function Inicio() {
                 <h1 className='titulo'>Bienvenid@ a nuestra tienda</h1>
                 <p className='descripcion'>Aquí encontrarás una variedad de productos para satisfacer tus necesidades.</p>
                 <p className='descripcion'>¡Explora nuestra colección y encuentra lo que más te gusta!</p>
-                <p className='descripcion'>¡No olvides registrarte para obtener descuentos exclusivos!</p>
+                <p className='descripcion'>¡No olvides registrarte para acceder a todos los productos!</p>
                 <p className='descripcion'>¡Contáctanos si tienes alguna pregunta o necesitas asistencia!</p>
                 <p className='descripcion'>¡Gracias por elegir nuestra tienda!</p>
 
