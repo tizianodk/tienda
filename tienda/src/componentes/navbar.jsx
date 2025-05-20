@@ -3,14 +3,15 @@ import carrito from '../imagenes/carrito1.png';
 import Registro from './registro';
 import Login from './login';
 import "../estilos/modal.css";
-import { href, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../imagenes/logo.png';
 
 
 
-function NavBar(){
+function NavBar({isAuthenticated, handleLogout,rol}){
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
+    const navigate = useNavigate();
     
     const handleOpenModal = (content) => {
         setModalContent(content);
@@ -22,14 +23,29 @@ function NavBar(){
         setModalContent(null);
     };
 
+    const handleLogoutAndRedirect = () => {
+        handleLogout();
+        navigate("/login");
+        
+    }
 
     return(
         <div className="NavBar">
             <img src={Logo} className='logo' />
             <ul className="nav">
                 <li> <Link to= "/">Inicio</Link></li>
-                <li> <Link to= "/productos">Productos</Link></li>
+                <li> 
+                    {isAuthenticated ? (
+                    <Link to= "/productos">Productos</Link>
+                    ) : (<a href='#' onClick={() => alert("Debes Registrarte o Iniciar Sesion Para Ver Los Productos!")}>Productos</a>)
+                }
+               </li>
                 <li> <Link to= "/" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
+                {!isAuthenticated && <li><Link to="/login">Iniciar Sesion</Link></li>}
+                {isAuthenticated && (
+                    <li><Link to="/" onClick={handleLogoutAndRedirect}>Cerrar Sesion</Link></li>
+                )}
+
             </ul>
             <div className="carrito">
                 <button onClick={() => handleOpenModal("carrito")}>

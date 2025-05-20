@@ -3,7 +3,7 @@ import "../estilos/modal.css"
 import { useNavigate } from 'react-router-dom';
 
 
-function Login({  handleOpenModal}) {
+function Login({ setIsAuthenticated,setRol, handleOpenModal}) {
 const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -33,12 +33,19 @@ const [formData, setFormData] = useState({
             if(response.ok){
                 const data = await response.json();
                 alert("Inicio de sesión exitoso");
-                // setIsAuthenticated(true);
+                setIsAuthenticated(true);
                 console.log(data);
+                setRol(data.user.rol);
                localStorage.setItem("userId", data.user.id);
                localStorage.setItem("nombre", data.user.nombre);
                localStorage.setItem("rol", data.user.rol);
-               navigate("/productos");
+               
+               if (data.user.rol === "admin"){
+                    navigate("/admin");
+                } else if (data.user.rol === "cliente"){
+                    navigate("/productos");
+                }
+
             } else{
                 alert("Error al iniciar sesión, algunas de las credenciales es incorrecta");
             }

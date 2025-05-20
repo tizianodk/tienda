@@ -12,6 +12,7 @@
     justify-content: center;
     position:absolute;
     left: 0;
+    
 }
 
 .footer img{
@@ -43,3 +44,4 @@
     float: right;
     margin-top: -30px;    
 }
+

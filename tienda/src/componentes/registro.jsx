@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import "../estilos/modal.css"
+import {useNavigate} from 'react-router-dom';
 
-function Registro({handleOpenModal}) {
+function Registro() {
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) =>{
         const {name,value} = e.target;
@@ -32,7 +35,7 @@ function Registro({handleOpenModal}) {
                 const data = await response.json();
                 alert("Usuario registrado con éxito");
                 console.log(data);
-                
+                navigate("/login");
             } else{
                 alert("Error al registrar el usuario");
             }
@@ -99,7 +102,7 @@ function Registro({handleOpenModal}) {
                 <button className='submit' type="submit">Registrarse</button>
                 <br />
                 
-                <p>¿Ya tienes una cuenta? <a href="#" onClick={() => handleOpenModal("login")}>Iniciar sesión</a></p>
+                <p>¿Ya tienes una cuenta? <a href="#" onClick={() =>  navigate("/login")}>Iniciar sesión</a></p>
                 <p>Al registrarte, aceptas nuestros <a href="#">Términos de servicio</a> y <a href="#">Política de privacidad</a>.</p>
 
 
