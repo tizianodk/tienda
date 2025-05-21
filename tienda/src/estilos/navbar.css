@@ -22,19 +22,16 @@
     margin-left: 35px;
     background-color: transparent;
     border-radius: 50%;
-    transition: all 0.5s ease;
 }
 
 .NavBar li{
     transition: all 0.5s ease;
-    color: black;
 }
 
 
 .NavBar li:hover{
     transition: all 0.5s ease;
     transform:scale(1.1);
-    ;
 }
 
 .NavBar h1{

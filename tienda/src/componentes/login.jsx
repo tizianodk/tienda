@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../estilos/modal.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 
 
 function Login({ setIsAuthenticated,setRol, handleOpenModal}) {
@@ -86,7 +86,7 @@ const [formData, setFormData] = useState({
                 
                 <button className="submit" type="submit">Iniciar Sesion</button>
                 <br />
-                <p>¿No tienes una cuenta? <a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></p>
+                <p>¿No tienes una cuenta? <Link to="/registro"><a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></Link></p>
                 <br />
 
             </form>

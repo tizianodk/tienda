@@ -37,10 +37,10 @@ function NavBar({isAuthenticated, handleLogout,rol}){
                 <li> 
                     {isAuthenticated ? (
                     <Link to= "/productos">Productos</Link>
-                    ) : (<a href='#' onClick={() => alert("Debes Registrarte o Iniciar Sesion Para Ver Los Productos!")}>Productos</a>)
+                    ) : (<a href='#' onClick={() => alert("Debes Registrarte e Iniciar Sesion Para Ver Los Productos!")}>Productos</a>)
                 }
                </li>
-                <li> <Link to= "/" onClick={() => handleOpenModal("registro")}> Registrarse</Link></li>
+                <li> <Link to= "/registro" > Registrarse</Link></li>
                 {!isAuthenticated && <li><Link to="/login">Iniciar Sesion</Link></li>}
                 {isAuthenticated && (
                     <li><Link to="/" onClick={handleLogoutAndRedirect}>Cerrar Sesion</Link></li>

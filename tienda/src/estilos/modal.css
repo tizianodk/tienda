@@ -35,6 +35,10 @@
     gap: 1px;
 }
 
+.form p{
+    margin: 0;
+    text-align: center;
+}
 .form input{
     padding: 5px;
     border-radius: 5px;
@@ -61,5 +65,4 @@
     justify-content: center;
     align-items: center;
     margin-left: 100px;
-
 }

@@ -33,7 +33,6 @@ function App(){
 
     const handleCloseModal = () => {
         setShowModal(false);
-       
     }
 
     const ProtectedRoute = ({ children, requiredRole }) => {
@@ -64,10 +63,10 @@ function App(){
                     }
                 />
                 <Route 
-                  
+                
                   path='/admin'
                   element={
-               
+                
                     <ProtectedRoute requiredRole="admin">
                         <AdminPanel/>
                     </ProtectedRoute>
@@ -75,9 +74,6 @@ function App(){
                 
                 
                 />
-
-
-
             </Routes>
         {!paginaLogin && !paginaRegistro && <Footer/>}
       </>
