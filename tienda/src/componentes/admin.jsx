@@ -1,17 +1,27 @@
 import { useState } from "react";
+import "../estilos/adminPanel.css";
+
 
 const AdminPanel = () => {
   const [form, setForm] = useState({
     nombre: "",
     descripcion: "",
     precio: "",
-    imagen: ""
+    imagen: null
   });
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setForm({
+      ...form,
+      imagen: file
     });
   };
 
@@ -39,8 +49,8 @@ const AdminPanel = () => {
 
   return (
     <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4">Agregar Producto</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <h2 className="titulo">Agregar Producto</h2>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           name="nombre"
@@ -67,13 +77,13 @@ const AdminPanel = () => {
           onChange={handleChange}
           className="border p-2 rounded"
           required
-        />
+        /> 
+        IMAGEN: 
         <input
-          type="text"
+          type="file"
           name="imagen"
           placeholder="URL de imagen"
-          value={form.imagen}
-          onChange={handleChange}
+          onChange={handleFileChange}
           className="border p-2 rounded"
         />
         <button

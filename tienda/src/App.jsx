@@ -18,6 +18,7 @@ function App(){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [rol, setRol] = useState(null);
     const location = useLocation(); 
+    const paginaAdmin = location.pathname === '/admin';
     const paginaLogin = location.pathname === '/login';
     const paginaRegistro = location.pathname === '/registro';
     const [setShowModal] = useState(false);
@@ -71,14 +72,12 @@ function App(){
                         <AdminPanel/>
                     </ProtectedRoute>
                   }
-                
-                
                 />
             </Routes>
-        {!paginaLogin && !paginaRegistro && <Footer/>}
+        {!paginaLogin && !paginaRegistro && !paginaAdmin && <Footer/>}
       </>
 
-    )
-}
+    );
+};
 
 export default App;

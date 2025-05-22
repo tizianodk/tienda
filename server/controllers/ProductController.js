@@ -14,4 +14,3 @@ exports.Post  = async (req,res)=>{
    }
 
 }
-
