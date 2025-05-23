@@ -45,3 +45,9 @@
     margin-top: -30px;    
 }
 
+@media (max-width: 768px) {
+    .footer{
+        flex-direction: column;
+        padding: 20px;    
+    }
+}

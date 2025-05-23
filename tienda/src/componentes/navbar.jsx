@@ -12,7 +12,7 @@ function NavBar({isAuthenticated, handleLogout,rol}){
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const navigate = useNavigate();
-    
+
     const handleOpenModal = (content) => {
         setModalContent(content);
         setShowModal(true);
@@ -29,9 +29,12 @@ function NavBar({isAuthenticated, handleLogout,rol}){
         
     }
 
+    
+
     return(
         <div className="NavBar">
             <img src={Logo} className='logo' />
+        
             <ul className="nav">
                 <li> <Link to= "/">Inicio</Link></li>
                 <li> 
