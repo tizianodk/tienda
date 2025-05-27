@@ -1,5 +1,6 @@
 const User = require("../models/user.js")
 const mongoose = require("mongoose")
+const jwt = require('jsonwebtoken');
 
 exports.getAllUsers = async (req,res)=>{
 
@@ -46,16 +47,22 @@ exports.Login = async(req,res)=>{
     }   
    
 
-  res.status(200).json({
-    message: "Login exitoso",
-    user: {
-      id: user._id,
-      nombre: user.nombre,
-      rol: user.rol,
-    },
-  })
-}
-    
+const token = jwt.sign(
+      { id: user._id, rol: user.rol },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
+
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        nombre: user.nombre,
+        email: user.email,
+        rol: user.rol        
+      }
+    });
+  }
 catch(err){
     console.log("ocurrio un error" +err)
 }

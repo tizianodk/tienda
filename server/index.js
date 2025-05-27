@@ -4,6 +4,8 @@ const server = express()
 const userRoutes = require("./routes/userRoutes.js")
 const productRoutes = require("./routes/ProductRoutes.js")
 const cors = require("cors")
+const ordenRoutes =require("./routes/ordenRoutes.js")
+require('dotenv').config();
 
 
 server.use(cors())
@@ -11,7 +13,7 @@ server.use(express.json())
 server.use("/uploads", express.static("uploads"));
 server.use("/usuarios",userRoutes)
 server.use("/productos",productRoutes)
-
+server.use("/ordenes",ordenRoutes)
 
 
 mongoose.connect('mongodb://localhost:27017/tienda2')

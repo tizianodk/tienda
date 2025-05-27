@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const producto = require("../models/producto.js");
-
 exports.Post = async (req, res) => {
   try {
     const { nombre, precio, descripcion } = req.body;

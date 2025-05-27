@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const productController = require("../controllers/ProductController");
+const authMiddleware = require('../middlewares/authMiddleware.js')
 
 const router = express.Router();
 
@@ -8,10 +9,10 @@ const router = express.Router();
 const upload = multer({ dest: "uploads/" }); // ✅ SOLO ESTA
 
 // Rutas
-router.post("/", upload.single("imagen"), productController.Post);
-router.get("/", productController.get);
-router.put("/editar/:id", upload.single("imagen"), productController.put); // ✅ Agregá multer acá también
-router.delete("/:id", productController.delete);
+router.post("/",authMiddleware,upload.single("imagen"), productController.Post);
+router.get("/",productController.get);
+router.put("/editar/:id", authMiddleware ,upload.single("imagen"), productController.put); // ✅ Agregá multer acá también
+router.delete("/:id", authMiddleware, productController.delete);
 
 module.exports = router;
 
