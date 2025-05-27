@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "../estilos/productos.css";
 
 
-function Productos(){
+function Productos() {
     
+
     const [productos, setProductos] = useState([]);
     const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ function Productos(){
         fetchProductos();
     }, []);
     
-
+    
     return(
         <div className='productos'>
             <h1 className='titulo'>Productos</h1>
@@ -37,8 +38,11 @@ function Productos(){
                         productos.map((producto) => (
                             <div key={producto._id} className="producto-item">
                                     <img src={`http://localhost:3000/uploads/${producto.imagen}`} alt={producto.nombre} />
-                                    <h2>{producto.nombre}</h2>
-                                    <button className='boton' onClick={() => navigate(`/producto/${producto._id}`)} > Comprar </button>
+                                    <h1>{producto.nombre}</h1>
+                                    <div className='botones'>
+                                        <button onClick={() => { navigate(`/producto/${producto._id}`) }} > Detalles </button>
+                                        
+                                    </div>
                                 </div>
                     ))
                     ) : (

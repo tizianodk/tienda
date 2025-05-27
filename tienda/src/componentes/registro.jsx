@@ -102,7 +102,8 @@ function Registro() {
                 <button className='submit' type="submit">Registrarse</button>
                 <br />
                 
-                {/* <p>¿Ya tienes una cuenta? <a href="#" onClick={() =>  navigate("/login")}>Iniciar sesión</a></p> */}
+                <p>¿Ya tienes una cuenta? <a href="#" onClick={() =>  navigate("/login")}>Iniciar sesión</a></p> 
+                <br />
                 <p>Al registrarte, aceptas nuestros <a href="#">Términos de servicio</a> y <a href="#">Política de privacidad</a>.</p>
 
 

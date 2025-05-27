@@ -1,6 +1,11 @@
 .productos img {
   width: 150px;
   height: 150px;
+  border-radius: 18px;
+  background-color: white;
+  background-size: cover;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .productos {
@@ -11,6 +16,7 @@
     margin-top: 2px;
     flex-wrap: wrap;
 }
+    
 
 .productos h1 {
   font-size: 20px;
@@ -22,7 +28,7 @@
     margin: 10px;
     padding: 10px;
     gap: 30px;
-    border-radius: 8px;
+    border-radius: 18px;
     flex-wrap: wrap;
     margin-bottom: 50px;
     justify-content: center;
@@ -36,13 +42,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+    border-radius: 18px;
+    background-color: darkgray;
+    background: linear-gradient(to bottom left, #000000, #454b6fa8);
+    gap: 10px;
+  }
 
-.producto .boton{
+.botones button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
     background-color: transparent;
-    border: none;
+    width: 180px;
     cursor: pointer;
     border: 1px solid #000000;
     border-radius: 8px;
-    background-color: green;
-}
+    background-color:green;
+  }

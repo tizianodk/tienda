@@ -2,9 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import "../estilos/productoDetalle.css";
 
-function ProductoDetalle({ productos }) {
+function ProductoDetalle({ productos, agregarAlCarrito }) {
     const { id } = useParams();
-    console.log("Productos recibidos:", productos);
 
     if (!productos || !Array.isArray(productos) || productos.length === 0) {
         return <div>Cargando...</div>;
@@ -16,7 +15,6 @@ function ProductoDetalle({ productos }) {
         return <div>Producto no encontrado</div>;
     }
 
-    console.log("Producto encontrado:", producto); 
 
     return (
         <div className="producto-detalle">
@@ -27,11 +25,13 @@ function ProductoDetalle({ productos }) {
                         <img key={index} src={`http://localhost:3000/uploads/${imagen}`} alt={`Imagen ${index + 1}`} />
                     ))
                 ) : (
-                    <img src={`http://localhost:3000/uploads/${producto.imagen}`} alt={producto.nombre} />
+                    <img src={`http://localhost:3000/uploads/${producto.imagen}`} alt={producto.nombre} style={{borderRadius:"10px"}} />
                 )}
             </div>
-            <p>Precio: ${producto.precio}</p>
-            <p>Descripción: {producto.descripcion}</p>
+            <strong><p>Precio: ${producto.precio}</p></strong>
+            <strong><p>Descripción: {producto.descripcion}</p></strong>
+            <button onClick={ () => {agregarAlCarrito(producto)}} style={{backgroundColor:"green"}}>Agregar Al Carrito</button> 
+
         </div>
     );
 }

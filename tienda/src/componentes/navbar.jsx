@@ -8,7 +8,7 @@ import Logo from '../imagenes/logo.png';
 
 
 
-function NavBar({isAuthenticated, handleLogout,rol}){
+function NavBar({isAuthenticated, handleLogout,rol,carritoItems}){
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const navigate = useNavigate();
@@ -27,7 +27,11 @@ function NavBar({isAuthenticated, handleLogout,rol}){
         handleLogout();
         navigate("/login");
         
-    }
+    };
+
+    const handleCarritoClick = () => {
+        navigate("/carrito");
+    };
 
     
 
@@ -51,8 +55,11 @@ function NavBar({isAuthenticated, handleLogout,rol}){
 
             </ul>
             <div className="carrito">
-                <button onClick={() => handleOpenModal("carrito")}>
-                    <img src={carrito}/>
+                <button onClick={handleCarritoClick}>
+                    <img src={carrito} alt="Carrito" />
+                    {carritoItems && carritoItems.length > 0 && (
+                        <span className="carrito-count">{carritoItems.length}</span>
+                    )}
                 </button>
             </div>
 

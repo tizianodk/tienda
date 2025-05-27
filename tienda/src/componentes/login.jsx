@@ -1,97 +1,94 @@
 import React, { useState } from 'react';
-import "../estilos/modal.css"
-import { useNavigate,Link } from 'react-router-dom';
+import "../estilos/modal.css";
+import { useNavigate, Link } from 'react-router-dom';
 
+function Login({ setIsAuthenticated, setRol, handleOpenModal }) {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-function Login({ setIsAuthenticated,setRol, handleOpenModal}) {
-const [formData, setFormData] = useState({
-        email: '',
-        password: ''
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
     });
+  };
 
-    const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/usuarios/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
 
-    const handleChange = (e) =>{
-        const {name,value} = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
+      if (response.ok) {
+        const data = await response.json();
+        alert("Inicio de sesión exitoso");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            const response = await fetch("http://localhost:3000/usuarios/login",{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+        setIsAuthenticated(true);
+        setRol(data.user.rol);
 
-            if(response.ok){
-                const data = await response.json();
-                alert("Inicio de sesión exitoso");
-                setIsAuthenticated(true);
-                console.log(data);
-                setRol(data.user.rol);
-               localStorage.setItem("userId", data.user.id);
-               localStorage.setItem("nombre", data.user.nombre);
-               localStorage.setItem("rol", data.user.rol);
-               
-               if (data.user.rol === "admin"){
-                    navigate("/admin");
-                } else if (data.user.rol === "cliente"){
-                    navigate("/productos");
-                }
+        // Guardar token y datos de usuario
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
+        localStorage.setItem("nombre", data.user.nombre);
+        localStorage.setItem("rol", data.user.rol);
 
-            } else{
-                alert("Error al iniciar sesión, algunas de las credenciales es incorrecta");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Error al iniciar sesión");
+        if (data.user.rol === "admin") {
+          navigate("/admin");
+        } else if (data.user.rol === "cliente") {
+          navigate("/productos");
         }
-    };
+      } else {
+        alert("Error al iniciar sesión, alguna de las credenciales es incorrecta");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error al iniciar sesión");
+    }
+  };
 
+  return (
+    <div>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1 className='titulo'>Iniciar Sesion</h1>
+        <input
+          type="text"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
 
+        <br />
 
-    
-    return(
-        <div>
-            <form className="form" onSubmit={handleSubmit}>
-                <h1 className='titulo'>Iniciar Sesion</h1>
-                <input 
-                type="text" 
-                placeholder="Email" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                />
-                
-                <br />
-                
-                <input 
-                type="password" 
-                placeholder="Contraseña"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required 
-                />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
 
-                <br />
-                
-                <button className="submit" type="submit">Iniciar Sesion</button>
-                <br />
-                <p>¿No tienes una cuenta? <Link to="/registro"><a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></Link></p>
-                <br />
+        <br />
 
-            </form>
-        </div>
-    )
-};
+        <button className="submit" type="submit">Iniciar Sesion</button>
+        <br />
+        <p>¿No tienes una cuenta? <Link to="/registro"><a href="#" onClick={() => handleOpenModal("registro")}>Registrarse</a></Link></p>
+        <br />
+      </form>
+    </div>
+  );
+}
 
-export default Login 
+export default Login;

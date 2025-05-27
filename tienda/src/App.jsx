@@ -13,8 +13,11 @@ import './estilos/productos.css';
 import Productos from './componentes/productos.jsx';
 import AdminPanel from './componentes/admin.jsx';
 import ProductoDetalle from './componentes/productoDetalle.jsx';
+import Carrito from './componentes/carrito.jsx';
 
 function App() {
+
+    const [carrito, setCarrito] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [rol, setRol] = useState(null);
     const [productos, setProductos] = useState([]);
@@ -22,6 +25,7 @@ function App() {
     const paginaAdmin = location.pathname === '/admin';
     const paginaLogin = location.pathname === '/login';
     const paginaRegistro = location.pathname === '/registro';
+    const paginaCarrito = location.pathname === '/carrito';
 
     const [setShowModal] = useState(false);
 
@@ -45,6 +49,7 @@ function App() {
     const handleLogout = () => {
         setIsAuthenticated(false);
         setRol(null);
+        setCarrito([]);
         localStorage.removeItem("userId");
         localStorage.removeItem("nombre");
         localStorage.removeItem("rol");
@@ -64,31 +69,56 @@ function App() {
         return children;
     };
 
-    console.log("isAuthenticated:", isAuthenticated);
-    console.log("rol:", rol);
+    const agregarAlCarrito = (producto) => {
+        setCarrito((prevCarrito) => {
+            const productoExistente = prevCarrito.find(item => item._id === producto._id);
+            if (productoExistente) {
+                return prevCarrito.map(item =>
+                    item._id === producto._id ? { ...item, cantidad: item.cantidad + 1 } : item
+                );
+            } else {
+                return [...prevCarrito, { ...producto, cantidad: 1 }];
+            }
+        });
+        alert(`Producto ${producto.nombre} agregado al carrito`);
+    }
 
     return (
         <>          
-            <NavBar isAuthenticated={isAuthenticated} handleLogout={handleLogout} rol={rol} />
+            <NavBar isAuthenticated={isAuthenticated} handleLogout={handleLogout} rol={rol} carritoItems={carrito} />
             <Routes>
                 <Route path="/" element={<Inicio />} />
+                
                 <Route path="/registro" element={<Registro handleCloseModal={handleCloseModal} />} />
+                
                 <Route 
                     path="/login" 
                     element={<Login setIsAuthenticated={setIsAuthenticated} setRol={setRol} />}
                 />
+
                 <Route 
-                    path="/productos" 
+                    path=
+                    "/productos" 
                     element={
                         <ProtectedRoute requiredRole="cliente">
-                            <Productos />
+                            <Productos  />
                         </ProtectedRoute>
                     }
                 />
                 <Route
-                path='/producto/:id'
-                element={<ProductoDetalle productos = {productos}/>}
+                    path="/carrito"    
+                    element= {
+                        <ProtectedRoute requiredRole="cliente">
+                            <Carrito carrito={carrito} setCarrito={setCarrito} />
+                        </ ProtectedRoute>
+                    }
                 />
+
+                <Route
+                path='/producto/:id'
+                element={<ProductoDetalle productos = {productos} agregarAlCarrito={agregarAlCarrito}/>}
+                />
+
                 <Route 
                     path="/admin"
                     element={
@@ -98,7 +128,7 @@ function App() {
                     }
                 />
             </Routes>
-            {!paginaLogin && !paginaRegistro && !paginaAdmin && <Footer />}
+            {!paginaLogin && !paginaRegistro && !paginaAdmin && !paginaCarrito && <Footer />}
         </>
     );
 }

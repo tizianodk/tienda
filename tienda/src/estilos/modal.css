@@ -1,4 +1,4 @@
-.modal {
+/* .modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,12 +27,13 @@
     font-size: 30px;
     cursor: pointer;
     color: red;
-}
+} */
 
 .form{
     display: flex;
     flex-direction: column;
     gap: 1px;
+    align-items: center;
 }
 
 .form p{
@@ -45,6 +46,7 @@
     border: 1px solid #ccc;
     height: 25px;
     margin-bottom: 5px;
+    width: 350px;
 }
 
 .titulo {

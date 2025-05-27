@@ -5,7 +5,7 @@ const AdminPanel = () => {
   const [form, setForm] = useState({
     nombre: "",
     precio: "",
-     descripcion: "",
+    descripcion: "",
     imagen: null,
   });
 
@@ -22,8 +22,7 @@ const AdminPanel = () => {
     try {
       const res = await fetch("http://localhost:3000/productos");
       const data = await res.json();
-      console.log("pr")
-      setProductos(data || []); 
+      setProductos(data || []);
     } catch (error) {
       console.error("Error cargando productos:", error);
     }
@@ -65,42 +64,32 @@ const AdminPanel = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Crear el objeto FormData
+
     const formData = new FormData();
     formData.append("nombre", form.nombre);
     formData.append("precio", form.precio);
     formData.append("descripcion", form.descripcion);
-  
-    // Solo agregar la imagen si hay una nueva seleccionada
+
     if (form.imagen) {
       formData.append("imagen", form.imagen);
     }
-  
-    // Configurar la URL y el método
+
     const url = modoEdicion
       ? `http://localhost:3000/productos/editar/${idEditando}`
       : "http://localhost:3000/productos";
     const method = modoEdicion ? "PUT" : "POST";
-  
+
+    const token = localStorage.getItem("token");
+
     try {
-      console.log("Enviando datos:", {
-        nombre: form.nombre,
-        precio: form.precio,
-        descripcion: form.descripcion,
-        imagen: form.imagen ? "Nueva imagen seleccionada" : "Sin imagen nueva",
-        modoEdicion,
-        method,
-        url,
-      });
-  
-      // Realizar la solicitud
       const res = await fetch(url, {
         method,
-        body: formData, // Enviar FormData directamente
+        headers: {
+          Authorization: `Bearer ${token}`, // <-- Aquí añades el token
+        },
+        body: formData,
       });
-  
-      // Verificar si la respuesta es JSON
+
       const contentType = res.headers.get("content-type");
       let data;
       if (contentType && contentType.includes("application/json")) {
@@ -108,18 +97,18 @@ const AdminPanel = () => {
       } else {
         const textResponse = await res.text();
         console.error("Respuesta como texto:", textResponse);
-        throw new Error(`El servidor devolvió HTML en lugar de JSON. Status: ${res.status}`);
+        throw new Error(
+          `El servidor devolvió HTML en lugar de JSON. Status: ${res.status}`
+        );
       }
-  
-      console.log("Respuesta del servidor:", data);
-  
+
       if (res.ok) {
         alert(modoEdicion ? "Producto actualizado" : "Producto agregado");
         setForm({ nombre: "", descripcion: "", precio: "", imagen: null });
         setModoEdicion(false);
         setIdEditando(null);
         setImagenActual(null);
-        fetchProductos(); // Recargar los productos
+        fetchProductos();
       } else {
         console.error("Error del servidor:", data);
         alert("Error: " + (data.message || data.error || "Error desconocido"));
@@ -132,9 +121,13 @@ const AdminPanel = () => {
 
   const eliminarProducto = async (id) => {
     if (window.confirm("¿Estás seguro de eliminar este producto?")) {
+      const token = localStorage.getItem("token");
       try {
         const res = await fetch(`http://localhost:3000/productos/${id}`, {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`, // <-- Aquí también añades el token
+          },
         });
         const data = await res.json();
         if (res.ok) {
@@ -172,31 +165,33 @@ const AdminPanel = () => {
           className="border p-2 rounded mb-2 w-full"
           required
         />
-        
+
         <textarea
+          rows="6"
           name="descripcion"
           placeholder="Descripción"
           value={form.descripcion}
           onChange={handleChange}
-          className="border p-2 rounded mb-2 w-full"
+          className="descripcion border p-2 rounded mb-4 w-full"
           required
         />
-        
+
         <label>IMAGEN:</label>
-        
-        {/* Mostrar imagen actual si estamos editando */}
+
         {modoEdicion && imagenActual && (
           <div className="mb-2">
             <p className="text-sm text-gray-600">Imagen actual:</p>
             <img
               src={`http://localhost:3000/uploads/${imagenActual}`}
               alt="Imagen actual"
-              style={{ width: "100px", marginBottom: "10px" }}
+              style={{ width: "100px", marginBottom: "10px", borderRadius: "10px", display: "flex", marginLeft: "auto", marginRight: "auto" }}
             />
-            <p className="text-sm text-gray-500">Selecciona una nueva imagen solo si quieres cambiarla</p>
+            <p className="text-sm text-gray-500">
+              Selecciona una nueva imagen solo si quieres cambiarla
+            </p>
           </div>
         )}
-        
+
         <input
           type="file"
           name="imagen"
@@ -204,15 +199,16 @@ const AdminPanel = () => {
           className="border p-2 rounded mb-4 w-full"
           accept="image/*"
         />
-        
+
         <div className="flex gap-2">
           <button
             type="submit"
             className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 flex-1"
+            style={{ marginRight: "10px" }}
           >
             {modoEdicion ? "Actualizar Producto" : "Guardar Producto"}
           </button>
-          
+
           {modoEdicion && (
             <button
               type="button"
@@ -225,17 +221,17 @@ const AdminPanel = () => {
         </div>
       </form>
 
-      <div className="mt-8">
         <h3 className="titulo">Productos Existentes</h3>
+      <div className="items mt-6">
         {productos.length === 0 && <p>No hay productos aún.</p>}
         {productos.map((p) => (
           <div
             key={p._id}
-            className="border p-2 mb-2 rounded flex justify-between items-center"
+            className="itemss "
           >
             <div>
               <strong>{p.nombre}</strong> - ${p.precio}
-              <p>{p.descripcion}</p>
+              <p><strong>Descripcion: </strong>{p.descripcion}</p>
               {p.imagen && (
                 <img
                   src={`http://localhost:3000/uploads/${p.imagen}`}
@@ -248,6 +244,7 @@ const AdminPanel = () => {
               <button
                 className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
                 onClick={() => editarProducto(p)}
+                style={{ margin: "10px" }}
               >
                 Editar
               </button>

@@ -86,7 +86,6 @@ function Inicio() {
                 <p className='descripcion'>¡No olvides registrarte para acceder a todos los productos!</p>
                 <p className='descripcion'>¡Contáctanos si tienes alguna pregunta o necesitas asistencia!</p>
                 <p className='descripcion'>¡Gracias por elegir nuestra tienda!</p>
-
             </div>
         </div>
     );
